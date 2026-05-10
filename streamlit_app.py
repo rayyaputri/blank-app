@@ -5,7 +5,7 @@ import ternary
 # Konfigurasi Halaman
 st.set_page_config(page_title="Pettijohn Classifier", layout="centered")
 
-st.title("💎 Sandstone Classifier (Pettijohn, 1975)")
+st.title("💎 Klasifikasi Batuan Sedimen (Pettijohn, 1975)")
 st.write("Masukkan persentase mineral dan matriks untuk memulai klasifikasi.")
 
 # --- STEP 1: INPUT DATA (Default Set ke 0.0) ---
