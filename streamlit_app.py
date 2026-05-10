@@ -29,8 +29,11 @@ if st.button("Classify & Plot Diagram"):
         F = (f / total) * 100
         L = (l / total) * 100
 
-        # Logika Klasifikasi
-        if m > 15:
+       # ---  LOGIKA KLASIFIKASI ---
+        if m > 75:
+            name = "Mudrock"
+            category = "Fine-grained"
+        elif m > 15:
             category = "Wacke"
             if Q > 95: name = "Quartz Wacke"
             elif F > L: name = "Feldspathic Wacke"
@@ -39,7 +42,7 @@ if st.button("Classify & Plot Diagram"):
             category = "Arenite"
             if Q > 95: name = "Quartz Arenite"
             elif Q > 75: name = "Subarkose" if F > L else "Sublitharenite"
-            else: name = "Arkose" if F > L else "Lithic Arenite"
+            else: name = "Arkosic Arenite" if F > L else "Lithic Arenite"
 
         # --- STEP 3: PLOTTING ---
         fig, tax = ternary.figure(scale=100)
