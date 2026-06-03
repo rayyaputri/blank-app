@@ -56,22 +56,16 @@ if st.button("Classify & Plot Diagram"):
         # Ambil posisi internal axes matplotlib untuk menaruh tulisan teks
         ax = tax.get_axes()
 
-        # --- TULISAN TEKS DI DALAM SEGITIGA MASING-MASING (HANYA INI SAJA) ---
+        # --- TULISAN TEKS DI DALAM SEGITIGA (HANYA YANG DIMINTA) ---
         if m > 75:
             ax.text(50, 50, "Mudrock", fontsize=14, color='black', ha='center', va='center', weight='bold')
         elif m > 15:
-            # Kategori Wacke / Greywacke (Teks tepat di tengah ruangan masing-masing)
-            ax.text(50, 97, "Quartz wacke", fontsize=8, color='black', ha='center', va='center')
-            ax.text(28, 50, "Feldspathic\nwacke", fontsize=10, color='black', ha='center', va='center')
-            ax.text(72, 50, "Lithic\nwacke", fontsize=10, color='black', ha='center', va='center')
-            ax.text(50, 25, "Greywacke", fontsize=12, color='darkgray', ha='center', va='center', weight='bold')
+            # Hanya tulisan Greywacke di tengah sesuai gambar contoh jika matriks Wacke
+            ax.text(50, 45, "Greywacke", fontsize=14, color='black', ha='center', va='center', weight='bold')
         else:
-            # Kategori Arenite (Teks tepat di tengah ruangan masing-masing)
-            ax.text(50, 97, "Quartz arenite", fontsize=8, color='black', ha='center', va='center')
-            ax.text(35, 83, "Subarkose", fontsize=9, color='black', ha='center', va='center')
-            ax.text(65, 83, "Sublitharenite", fontsize=9, color='black', ha='center', va='center')
-            ax.text(20, 35, "Arkosic\narenite", fontsize=11, color='black', ha='center', va='center')
-            ax.text(80, 35, "Lithic\narenite", fontsize=11, color='black', ha='center', va='center')
+            # Hanya Arkosic arenite dan Lithic arenite di posisi masing-masing jika matriks Arenite
+            ax.text(25, 35, "Arkosic\narenite", fontsize=12, color='black', ha='center', va='center')
+            ax.text(75, 35, "Lithic\narenite", fontsize=12, color='black', ha='center', va='center')
 
         # Titik Sampel (L, Q, F) - Di-plot paling depan agar tidak tertimbun teks
         tax.scatter([(L, Q, F)], marker='o', color='yellow', s=250, edgecolors='black', zorder=20)
