@@ -53,22 +53,40 @@ if st.button("Classify & Plot Diagram"):
         tax.line((0, 75, 25), (25, 75, 0), linewidth=1.5, color='black')
         tax.line((0, 100, 0), (50, 0, 50), linewidth=1.5, color='black')
 
-        # Titik Sampel (L, Q, F)
-        tax.scatter([(L, Q, F)], marker='o', color='yellow', s=200, edgecolors='black', zorder=10)
-
-        # Label Sudut
+        # Ambil posisi internal axes matplotlib untuk menaruh tulisan teks
         ax = tax.get_axes()
-        ax.text(50, 103, "QUARTZ (Q)", fontsize=10, fontweight='bold', ha='center')
-        ax.text(-12, -5, "FELDSPAR (F)", fontsize=10, fontweight='bold', ha='center')
-        ax.text(112, -5, "LITHIC (L)", fontsize=10, fontweight='bold', ha='center')
 
-        # --- TAMBAHAN KETERANGAN MATRIKS PADA PLOTTING ---
-        # Membuat label teks dinamis berformat kotak (bbox) di atas puncak diagram segitiga
+        # --- TULISAN NAMA BATUAN DI DALAM SEGITIGA (Sesuai Matriks) ---
+        if m > 75:
+            # Jika Mudrock, segitiga kita biarkan kosong atau tulis besar di tengah
+            ax.text(50, 50, "MUDROCK ZONE\n(Matrix > 75%)", fontsize=16, color='gray', ha='center', va='center', weight='bold')
+        elif m > 15:
+            # Jika Wacke / Greywacke
+            ax.text(50, 97, "Quartz\nWacke", fontsize=8, color='purple', ha='center', va='center')
+            ax.text(35, 50, "Feldspathic\nWacke", fontsize=11, color='darkred', ha='center', va='center')
+            ax.text(65, 50, "Lithic\nWacke", fontsize=11, color='darkgreen', ha='center', va='center')
+            ax.text(50, 25, "GREYWACKE", fontsize=14, color='black', alpha=0.2, ha='center', va='center', weight='bold')
+        else:
+            # Jika Arenite (Matriks Bersih 0-15%)
+            ax.text(50, 97, "Quartz\nArenite", fontsize=8, color='purple', ha='center', va='center')
+            ax.text(38, 83, "Subarkose", fontsize=9, color='darkblue', ha='center', va='center')
+            ax.text(62, 83, "Sublith-\narenite", fontsize=8, color='darkblue', ha='center', va='center')
+            ax.text(22, 35, "Arkosic\nArenite", fontsize=11, color='darkred', ha='center', va='center')
+            ax.text(78, 35, "Lithic\nArenite", fontsize=11, color='darkgreen', ha='center', va='center')
+            ax.text(50, 25, "ARENITE ZONE", fontsize=14, color='black', alpha=0.2, ha='center', va='center', weight='bold')
+
+        # Titik Sampel (L, Q, F) - Di-plot paling atas (zorder tinggi) agar tidak tertimbun tulisan
+        tax.scatter([(L, Q, F)], marker='o', color='yellow', s=250, edgecolors='black', zorder=20)
+
+        # Label Sudut Utama Segitiga
+        ax.text(50, 103, "QUARTZ (Q)", fontsize=11, fontweight='bold', ha='center')
+        ax.text(-12, -5, "FELDSPAR (F)", fontsize=11, fontweight='bold', ha='center')
+        ax.text(112, -5, "LITHIC (L)", fontsize=11, fontweight='bold', ha='center')
+
+        # Keterangan Statis Kategori Utama di paling atas luar diagram
         ax.text(50, 115, f"KATEGORI UTAMA: {category.upper()}", 
                 fontsize=12, fontweight='bold', color='darkblue', ha='center',
                 bbox=dict(facecolor='white', alpha=0.9, edgecolor='gray', boxstyle='round,pad=0.5'))
-        
-        # Sub-keterangan nilai matriks presisi di bawah judul kategori utama
         ax.text(50, 109, f"(Kandungan Matrix = {m}%)", 
                 fontsize=10, style='italic', color='black', ha='center')
 
