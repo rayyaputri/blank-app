@@ -29,7 +29,7 @@ if st.button("Classify & Plot Diagram"):
         F = (f / total) * 100
         L = (l / total) * 100
 
-       # ---  LOGIKA KLASIFIKASI ---
+       # --- LOGIKA KLASIFIKASI ---
         if m > 75:
             name = "Mudrock"
             category = "Fine-grained"
@@ -46,9 +46,9 @@ if st.button("Classify & Plot Diagram"):
 
         # --- STEP 3: PLOTTING ---
         fig, tax = ternary.figure(scale=100)
-        fig.set_size_inches(8, 7)
+        fig.set_size_inches(9, 8)
 
-        # Garis Pembagi
+        # Garis Pembagi Batas Batuan (QFL)
         tax.line((0, 95, 5), (5, 95, 0), linewidth=1.5, color='black')
         tax.line((0, 75, 25), (25, 75, 0), linewidth=1.5, color='black')
         tax.line((0, 100, 0), (50, 0, 50), linewidth=1.5, color='black')
@@ -56,39 +56,30 @@ if st.button("Classify & Plot Diagram"):
         # Ambil posisi internal axes matplotlib untuk menaruh tulisan teks
         ax = tax.get_axes()
 
-        # --- TULISAN NAMA BATUAN DI DALAM SEGITIGA (Sesuai Matriks) ---
+        # --- TULISAN TEKS DI DALAM SEGITIGA MASING-MASING (HANYA INI SAJA) ---
         if m > 75:
-            # Jika Mudrock, segitiga kita biarkan kosong atau tulis besar di tengah
-            ax.text(50, 50, "MUDROCK ZONE\n(Matrix > 75%)", fontsize=16, color='gray', ha='center', va='center', weight='bold')
+            ax.text(50, 50, "Mudrock", fontsize=14, color='black', ha='center', va='center', weight='bold')
         elif m > 15:
-            # Jika Wacke / Greywacke
-            ax.text(50, 97, "Quartz\nWacke", fontsize=8, color='purple', ha='center', va='center')
-            ax.text(35, 50, "Feldspathic\nWacke", fontsize=11, color='darkred', ha='center', va='center')
-            ax.text(65, 50, "Lithic\nWacke", fontsize=11, color='darkgreen', ha='center', va='center')
-            ax.text(50, 25, "GREYWACKE", fontsize=14, color='black', alpha=0.2, ha='center', va='center', weight='bold')
+            # Kategori Wacke / Greywacke (Teks tepat di tengah ruangan masing-masing)
+            ax.text(50, 97, "Quartz wacke", fontsize=8, color='black', ha='center', va='center')
+            ax.text(28, 50, "Feldspathic\nwacke", fontsize=10, color='black', ha='center', va='center')
+            ax.text(72, 50, "Lithic\nwacke", fontsize=10, color='black', ha='center', va='center')
+            ax.text(50, 25, "Greywacke", fontsize=12, color='darkgray', ha='center', va='center', weight='bold')
         else:
-            # Jika Arenite (Matriks Bersih 0-15%)
-            ax.text(50, 97, "Quartz\nArenite", fontsize=8, color='purple', ha='center', va='center')
-            ax.text(38, 83, "Subarkose", fontsize=9, color='darkblue', ha='center', va='center')
-            ax.text(62, 83, "Sublith-\narenite", fontsize=8, color='darkblue', ha='center', va='center')
-            ax.text(22, 35, "Arkosic\nArenite", fontsize=11, color='darkred', ha='center', va='center')
-            ax.text(78, 35, "Lithic\nArenite", fontsize=11, color='darkgreen', ha='center', va='center')
-            ax.text(50, 25, "ARENITE ZONE", fontsize=14, color='black', alpha=0.2, ha='center', va='center', weight='bold')
+            # Kategori Arenite (Teks tepat di tengah ruangan masing-masing)
+            ax.text(50, 97, "Quartz arenite", fontsize=8, color='black', ha='center', va='center')
+            ax.text(35, 83, "Subarkose", fontsize=9, color='black', ha='center', va='center')
+            ax.text(65, 83, "Sublitharenite", fontsize=9, color='black', ha='center', va='center')
+            ax.text(20, 35, "Arkosic\narenite", fontsize=11, color='black', ha='center', va='center')
+            ax.text(80, 35, "Lithic\narenite", fontsize=11, color='black', ha='center', va='center')
 
-        # Titik Sampel (L, Q, F) - Di-plot paling atas (zorder tinggi) agar tidak tertimbun tulisan
+        # Titik Sampel (L, Q, F) - Di-plot paling depan agar tidak tertimbun teks
         tax.scatter([(L, Q, F)], marker='o', color='yellow', s=250, edgecolors='black', zorder=20)
 
         # Label Sudut Utama Segitiga
-        ax.text(50, 103, "QUARTZ (Q)", fontsize=11, fontweight='bold', ha='center')
-        ax.text(-12, -5, "FELDSPAR (F)", fontsize=11, fontweight='bold', ha='center')
-        ax.text(112, -5, "LITHIC (L)", fontsize=11, fontweight='bold', ha='center')
-
-        # Keterangan Statis Kategori Utama di paling atas luar diagram
-        ax.text(50, 115, f"KATEGORI UTAMA: {category.upper()}", 
-                fontsize=12, fontweight='bold', color='darkblue', ha='center',
-                bbox=dict(facecolor='white', alpha=0.9, edgecolor='gray', boxstyle='round,pad=0.5'))
-        ax.text(50, 109, f"(Kandungan Matrix = {m}%)", 
-                fontsize=10, style='italic', color='black', ha='center')
+        ax.text(50, 103, "Quartz", fontsize=11, fontweight='bold', ha='center')
+        ax.text(-12, -5, "Feldspar", fontsize=11, fontweight='bold', ha='center')
+        ax.text(112, -5, "Lithic fragments", fontsize=11, fontweight='bold', ha='center')
 
         tax.boundary(linewidth=2)
         tax.clear_matplotlib_ticks()
