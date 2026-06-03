@@ -62,6 +62,16 @@ if st.button("Classify & Plot Diagram"):
         ax.text(-12, -5, "FELDSPAR (F)", fontsize=10, fontweight='bold', ha='center')
         ax.text(112, -5, "LITHIC (L)", fontsize=10, fontweight='bold', ha='center')
 
+        # --- TAMBAHAN KETERANGAN MATRIKS PADA PLOTTING ---
+        # Membuat label teks dinamis berformat kotak (bbox) di atas puncak diagram segitiga
+        ax.text(50, 115, f"KATEGORI UTAMA: {category.upper()}", 
+                fontsize=12, fontweight='bold', color='darkblue', ha='center',
+                bbox=dict(facecolor='white', alpha=0.9, edgecolor='gray', boxstyle='round,pad=0.5'))
+        
+        # Sub-keterangan nilai matriks presisi di bawah judul kategori utama
+        ax.text(50, 109, f"(Kandungan Matrix = {m}%)", 
+                fontsize=10, style='italic', color='black', ha='center')
+
         tax.boundary(linewidth=2)
         tax.clear_matplotlib_ticks()
         ax.axis('off')
