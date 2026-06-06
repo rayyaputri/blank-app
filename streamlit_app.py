@@ -64,14 +64,14 @@ if st.button("Classify & Plot Diagram"):
             ax.text(50, 45, "Greywacke", fontsize=14, color='black', ha='center', va='center', weight='bold')
         else:
             # Hanya Arkosic arenite dan Lithic arenite di posisi masing-masing jika matriks Arenite
-            ax.text(25, 35, "Arkosic\narenite", fontsize=12, color='black', ha='center', va='center')
-            ax.text(75, 35, "Lithic\narenite", fontsize=12, color='black', ha='center', va='center')
+            ax.text(28, 35, "Arkosic\narenite", fontsize=12, color='black', ha='center', va='center')
+            ax.text(72, 35, "Lithic\narenite", fontsize=12, color='black', ha='center', va='center')
 
         # Titik Sampel (L, Q, F) - Di-plot paling depan agar tidak tertimbun teks
         tax.scatter([(L, Q, F)], marker='o', color='yellow', s=250, edgecolors='black', zorder=20)
 
         # Label Sudut Utama Segitiga
-        ax.text(50, 103, "Quartz", fontsize=11, fontweight='bold', ha='center')
+        ax.text(50, 100, "Quartz", fontsize=11, fontweight='bold', ha='center')
         ax.text(-12, -5, "Feldspar", fontsize=11, fontweight='bold', ha='center')
         ax.text(112, -5, "Lithic fragments", fontsize=11, fontweight='bold', ha='center')
 
